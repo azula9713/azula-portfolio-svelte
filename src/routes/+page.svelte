@@ -15,8 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Portfolio</title>
-	<meta name="description" content="Portfolio" />
+	<title>Nilesh Viduranga</title>
 </svelte:head>
 
 <div class="flex flex-col items-start justify-start px-4 py-8 space-y-4">
