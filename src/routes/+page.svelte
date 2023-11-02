@@ -1,12 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import LetsTalkButton from '$lib/components/LetsTalkButton.svelte';
+	import Button from '$lib/components/common/Button.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import TechStack from '$lib/components/TechStack.svelte';
 	import ConnectWithMe from '$lib/components/ConnectWithMe.svelte';
 	import Intro from '$lib/components/Intro.svelte';
 	import WorkHistory from '$lib/components/WorkHistory.svelte';
+	import { sideBarState } from '$lib/stores';
 
 	let ready = false;
 
@@ -24,7 +25,13 @@
 	</h1>
 	{#if ready}
 		<Intro />
-		<LetsTalkButton />
+		<Button
+			label="Let's talk!"
+			delay={2000}
+			onClick={() => {
+				sideBarState.set(false);
+			}}
+		/>
 		<TechStack />
 		<Projects />
 		<WorkHistory />

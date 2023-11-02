@@ -1,34 +1,19 @@
 <script>
-	import {
-		Drawer,
-		Button,
-		CloseButton,
-		Label,
-		Input,
-		Textarea,
-		P,
-		A,
-		Sidebar,
-		SidebarItem,
-		SidebarWrapper
-	} from 'flowbite-svelte';
-
+	import { onDestroy } from 'svelte';
+	import { Drawer, Button, CloseButton, Label, Input, Textarea } from 'flowbite-svelte';
 	import { sineIn } from 'svelte/easing';
-	import { getContext } from 'svelte';
 	import { DownloadSolid } from 'flowbite-svelte-icons';
 
-	const isActive = getContext('isActive');
+	import { sideBarState } from '$lib/stores';
 
 	let transitionParams = {
 		x: 320,
 		duration: 200,
 		easing: sineIn
 	};
-
-	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 </script>
 
-<Drawer transitionType="fly" {transitionParams} bind:hidden={$isActive} placement="right">
+<Drawer transitionType="fly" {transitionParams} bind:hidden={$sideBarState} placement="right" out>
 	<div class="flex items-center">
 		<h5
 			class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
@@ -37,14 +22,7 @@
 		</h5>
 		<CloseButton
 			on:click={() => {
-				isActive.update(
-					(
-						/**
-						 * @type {boolean}
-						 */
-						n
-					) => !n
-				);
+				sideBarState.set(true);
 			}}
 			class="mb-4 dark:text-white"
 		/>
