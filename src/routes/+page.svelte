@@ -1,12 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import LetsTalkButton from '$lib/components/LetsTalkButton.svelte';
+	import Button from '$lib/components/common/Button.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import TechStack from '$lib/components/TechStack.svelte';
 	import ConnectWithMe from '$lib/components/ConnectWithMe.svelte';
 	import Intro from '$lib/components/Intro.svelte';
 	import WorkHistory from '$lib/components/WorkHistory.svelte';
+	import { sideBarState } from '$lib/stores';
 
 	let ready = false;
 
@@ -14,8 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Portfolio</title>
-	<meta name="description" content="Portfolio" />
+	<title>Nilesh Viduranga</title>
 </svelte:head>
 
 <div class="flex flex-col items-start justify-start px-4 py-8 space-y-4">
@@ -24,7 +24,13 @@
 	</h1>
 	{#if ready}
 		<Intro />
-		<LetsTalkButton />
+		<Button
+			label="Let's talk!"
+			delay={2000}
+			onClick={() => {
+				sideBarState.set(false);
+			}}
+		/>
 		<TechStack />
 		<Projects />
 		<WorkHistory />
