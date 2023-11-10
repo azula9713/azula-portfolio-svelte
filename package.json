@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"firebase": "^10.6.0",
 		"svrollbar": "^0.12.0"
 	}
 }
