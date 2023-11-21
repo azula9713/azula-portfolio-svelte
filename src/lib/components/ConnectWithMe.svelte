@@ -1,11 +1,11 @@
 <script>
 	import { SpeedDial, SpeedDialButton } from 'flowbite-svelte';
 	import {
-		LinkedinSolid,
 		GithubSolid,
-		TwitterSolid,
+		LinkedinSolid,
 		MailBoxSolid,
 		PapperClipSolid,
+		TwitterSolid,
 		UserCircleSolid
 	} from 'flowbite-svelte-icons';
 </script>
@@ -13,8 +13,8 @@
 <SpeedDial
 	defaultClass="fixed left-4 bottom-32 text-primary bg-primary rounded-full"
 	placement="top-end"
-	textOutside={false}
-	name=""
+	textOutside={true}
+	name="Connect with me"
 >
 	<UserCircleSolid slot="icon" />
 	<SpeedDialButton name="Github" on:click={() => window.open('https://github.com/azula9713')}>
@@ -32,7 +32,7 @@
 	>
 		<PapperClipSolid class="w-5 h-5" />
 	</SpeedDialButton>
-	<SpeedDialButton name="X" on:click={() => window.open('https://twitter.com/azula9713')}>
+	<SpeedDialButton name="X" on:click={() => window.open('https://x.com/azula9713')}>
 		<TwitterSolid class="w-5 h-5" />
 	</SpeedDialButton>
 	<SpeedDialButton
