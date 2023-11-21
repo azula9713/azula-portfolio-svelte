@@ -1,7 +1,7 @@
 const workHistory = [
 	{
 		id: 1,
-		title: 'Senior Software Engineer: Eyepax IT Consulting, Colombo, Sri Lanka',
+		title: 'Senior Software Engineer: Intervest Software Technologies, Colombo, Sri Lanka',
 		date: 'November 2023 - Present',
 		work: [
 			{
@@ -80,6 +80,24 @@ const workHistory = [
 		title: 'Associate Software Engineer: Eutech Cybernetics, Colombo, Sri Lanka',
 		date: 'June 2019 - May 2020',
 		work: [
+			{
+				id: 1,
+				task: 'Worked closely with development team members to identify and remove software bugs.'
+			},
+			{
+				id: 2,
+				task: 'Implemented and updated application modules under the direction of Senior Software Developers.'
+			},
+			{
+				id: 3,
+				task: 'Utilized crucial design software skills to assist with projects.'
+			}
+		]
+	}, {
+		id: 6,
+		title: 'Software Engineer Intern: Ceylon Electricity Board, Colombo, Sri Lanka',
+		date: 'October 2018 - April 2019',
+		work:[
 			{
 				id: 1,
 				task: 'Worked closely with development team members to identify and remove software bugs.'
