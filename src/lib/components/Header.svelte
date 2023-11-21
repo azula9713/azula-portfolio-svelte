@@ -2,8 +2,8 @@
 	import { DarkMode } from 'flowbite-svelte';
 	import { BarsSolid } from 'flowbite-svelte-icons';
 
+	import logo from '$lib/images/yae.png';
 	import { sideBarState } from '$lib/stores';
-	import logo from '$lib/images/svelte-logo.svg';
 	import Drawer from './Drawer.svelte';
 
 	let btnClass =
@@ -12,9 +12,7 @@
 
 <header class="flex flex-row items-center justify-between w-full px-2 py-2 bg-white dark:bg-black">
 	<div class="flex flex-row items-center justify-center space-x-4">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" class="h-8 w-8 m-2" />
-		</a>
+		<img src={logo} alt="SvelteKit" class="h-12 w-12 m-2" style="transform: scaleX(-1)" />
 	</div>
 	<div class="flex flex-row items-center justify-center space-x-4">
 		<!-- <Icon class="h-8 w-8 text-primary" src={Bars3BottomRight} solid /> -->
