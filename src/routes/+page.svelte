@@ -1,12 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
 
+	import Button from '$lib/components/common/Button.svelte';
 	import ConnectWithMe from '$lib/components/ConnectWithMe.svelte';
 	import Intro from '$lib/components/Intro.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import TechStack from '$lib/components/TechStack.svelte';
 	import WorkHistory from '$lib/components/WorkHistory.svelte';
-	import Button from '$lib/components/common/Button.svelte';
 	import { sideBarState } from '$lib/stores';
 
 	let ready = false;
