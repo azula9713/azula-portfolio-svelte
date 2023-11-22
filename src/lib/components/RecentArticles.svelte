@@ -11,11 +11,11 @@
 	 */
 	let articles = [];
 
+	//define separate dev and prod rss urls
 	const rssURL =
-		'https://cors-anywhere.herokuapp.com/https://blog.yaepublishinghouse.online/rss.xml';
-
-	// function parseElement(element) {
-	//     const reg
+		process.env.NODE_ENV === 'development'
+			? 'https://cors-anywhere.herokuapp.com/https://blog.yaepublishinghouse.online/rss.xml'
+			: 'https://blog.yaepublishinghouse.online/rss.xml';
 
 	onMount(() => {
 		axios.get(rssURL).then((res) => {
@@ -70,7 +70,6 @@
 
 						image: imageElement.innerHTML
 					});
-					console.log('articles', articles);
 				}
 			});
 
@@ -92,9 +91,10 @@
 					<h1 class="text-2xl font-bold text-gray-700 dark:text-gray-200 text-left w-full">
 						{article.title}
 					</h1>
-					<!-- display image and description side by side -->
-					<div class="flex flex-col lg:flex-row items-start justify-center w-full space-x-4">
-						<img src={article.image} alt={article.title} class="w-1/2" />
+					<div
+						class="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full lg:space-x-4"
+					>
+						<img src={article.image} alt={article.title} class="w-full lg:w-1/2" />
 						<div class="h-full flex flex-col items-stretch">
 							<div class="text-gray-600 dark:text-gray-300 mt-2 text-left">
 								{@html article.description}
