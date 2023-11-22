@@ -18,7 +18,6 @@
 		fetch(rssURL)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log('RSS DATA: ', data);
 				articles = data.slice(0, maxArticles);
 			});
 	});
