@@ -17,6 +17,7 @@
 			: 'https://blog.yaepublishinghouse.online/rss.xml';
 
 	onMount(() => {
+		console.log('CURRENT NODE ENVIRONMENT: ', process.env.NODE_ENV);
 		fetch(rssURL)
 			.then((res) => res.text())
 			.then((data) => {
