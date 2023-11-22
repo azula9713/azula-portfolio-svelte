@@ -1,4 +1,5 @@
 <script>
+	import { XMLParser } from 'fast-xml-parser';
 	import { onMount } from 'svelte';
 	import { quintOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
@@ -21,61 +22,26 @@
 		fetch(rssURL)
 			.then((res) => res.text())
 			.then((data) => {
-				const parser = new DOMParser();
-				const xml = parser.parseFromString(data, 'text/xml');
-				const items = xml.querySelectorAll('item');
+				const parser = new XMLParser();
+				const parsedData = parser.parse(data);
+				const items = parsedData.rss.channel.item;
 
 				const maxArticles = 3;
-				/**
-				 * @type {{ title: string; link: string; pubDate: string; description: string; image: string; }[]}
-				 */
-				let temp = [];
 
-				items.forEach((item) => {
-					/**
-					 * @typedef {Object} Article
-					 * @property {string} title - The article's title.
-					 * @property {string} link - The article's link.
-					 * @property {string} pubDate - The article's publication date.
-					 * @property {string} description - The article's description.
-					 * @property {string} image - The article's image.
-					 *
-					 */
+				let temp = items.map(
+					(
+						/** @type {{ title: any; link: any; pubDate: any; description: any; cover_image: any; }} */ item
+					) => ({
+						title: item.title,
+						link: item.link,
+						pubDate: item.pubDate,
+						// max 67 words for description and add ... at the end
+						description: item.description.split(' ').slice(0, 60).join(' ') + '...',
+						image: item.cover_image
+					})
+				);
 
-					const titleElement = item.querySelector('title');
-					const linkElement = item.querySelector('link');
-					const pubDateElement = item.querySelector('pubDate');
-					const descriptionElement = item.querySelector('description');
-					const imageElement = item.querySelector('cover_image');
-
-					if (
-						titleElement &&
-						linkElement &&
-						pubDateElement &&
-						descriptionElement &&
-						imageElement &&
-						temp.length < maxArticles
-					) {
-						temp.push({
-							title: titleElement.innerHTML.replace('<![CDATA[', '').replace(']]>', ''),
-							link: linkElement.innerHTML,
-							pubDate: pubDateElement.innerHTML,
-							description: descriptionElement.innerHTML
-								.replace('<![CDATA[', '')
-								.replace(']]>', '')
-								// limit to 67 words
-								.split(' ')
-								.slice(0, 67)
-								.join(' ')
-								// append ellipsis
-								.concat('...'),
-
-							image: imageElement.innerHTML
-						});
-					}
-				});
-
-				articles = temp;
+				articles = temp.slice(0, maxArticles);
 			});
 	});
 </script>
