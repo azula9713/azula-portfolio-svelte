@@ -4,12 +4,22 @@
 </script>
 
 <section class="font-semibold text-gray-500 dark:text-gray-400">
-	<h2
-		class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-700 dark:text-gray-200"
-		transition:fade={{ duration: 1000, delay: 1000, easing: quintOut }}
+	<div
+		class="w-full flex flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-2 md:items-center md:justify-between"
 	>
-		Developer, Weeb, Gamer, <span class="text-primary"> and a lot more... </span>
-	</h2>
+		<img
+			src="https://pbs.twimg.com/profile_images/1680872507182661632/0-rWa-vC_200x200.jpg"
+			alt="profilepic"
+			class="w-full lg:w-1/4"
+		/>
+		<h2
+			class="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-700 dark:text-gray-200"
+			transition:fade={{ duration: 1000, delay: 1000, easing: quintOut }}
+		>
+			Developer, Weeb, Gamer, <span class="text-primary"> and a lot more... </span>
+		</h2>
+	</div>
+
 	<p
 		class="text-gray-600 dark:text-gray-300 mt-6 text-justify"
 		transition:fade={{ duration: 1000, delay: 1250, easing: quintOut }}
