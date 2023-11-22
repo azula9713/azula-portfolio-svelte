@@ -39,7 +39,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"axios": "^1.6.2",
 		"firebase": "^10.6.0",
 		"svrollbar": "^0.12.0"
 	}
