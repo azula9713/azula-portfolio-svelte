@@ -6,76 +6,20 @@
 	import Title from './common/Title.svelte';
 
 	/**
-	 * @type {{ title: string; link: string; pubDate: string; description: string; image: string }[]}
+	 * @type {{ title: string; link: string; pubDate: string; description: string; cover: string }[]}
 	 */
 	let articles = [];
+	const maxArticles = 3;
 
 	//define separate dev and prod rss urls
-	const rssURL =
-		process.env.NODE_ENV === 'development'
-			? 'https://cors-anywhere.herokuapp.com/https://blog.yaepublishinghouse.online/rss.xml'
-			: 'https://blog.yaepublishinghouse.online/rss.xml';
+	const rssURL = import.meta.env.VITE_RSS_URL;
 
 	onMount(() => {
-		console.log('CURRENT NODE ENVIRONMENT: ', process.env.NODE_ENV);
 		fetch(rssURL)
-			.then((res) => res.text())
+			.then((res) => res.json())
 			.then((data) => {
-				const parser = new DOMParser();
-				const xml = parser.parseFromString(data, 'text/xml');
-				const items = xml.querySelectorAll('item');
-
-				const maxArticles = 3;
-				/**
-				 * @type {{ title: string; link: string; pubDate: string; description: string; image: string; }[]}
-				 */
-				let temp = [];
-
-				items.forEach((item) => {
-					/**
-					 * @typedef {Object} Article
-					 * @property {string} title - The article's title.
-					 * @property {string} link - The article's link.
-					 * @property {string} pubDate - The article's publication date.
-					 * @property {string} description - The article's description.
-					 * @property {string} image - The article's image.
-					 *
-					 */
-
-					const titleElement = item.querySelector('title');
-					const linkElement = item.querySelector('link');
-					const pubDateElement = item.querySelector('pubDate');
-					const descriptionElement = item.querySelector('description');
-					const imageElement = item.querySelector('cover_image');
-
-					if (
-						titleElement &&
-						linkElement &&
-						pubDateElement &&
-						descriptionElement &&
-						imageElement &&
-						temp.length < maxArticles
-					) {
-						temp.push({
-							title: titleElement.innerHTML.replace('<![CDATA[', '').replace(']]>', ''),
-							link: linkElement.innerHTML,
-							pubDate: pubDateElement.innerHTML,
-							description: descriptionElement.innerHTML
-								.replace('<![CDATA[', '')
-								.replace(']]>', '')
-								// limit to 67 words
-								.split(' ')
-								.slice(0, 67)
-								.join(' ')
-								// append ellipsis
-								.concat('...'),
-
-							image: imageElement.innerHTML
-						});
-					}
-				});
-
-				articles = temp;
+				console.log('RSS DATA: ', data);
+				articles = data.slice(0, maxArticles);
 			});
 	});
 </script>
@@ -96,10 +40,11 @@
 					<div
 						class="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full lg:space-x-4"
 					>
-						<img src={article.image} alt={article.title} class="w-full lg:w-1/2" />
+						<img src={article.cover} alt={article.title} class="w-full lg:w-1/2" />
 						<div class="h-full flex flex-col items-stretch">
 							<div class="text-gray-600 dark:text-gray-300 mt-2 text-left">
-								{@html article.description}
+								<!-- max 60 words -->
+								{article.description.split(' ').slice(0, 60).join(' ')}...
 							</div>
 							<a
 								href={article.link}
