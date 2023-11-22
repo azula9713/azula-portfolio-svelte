@@ -7,7 +7,7 @@
 
 <section class="font-semibold text-gray-500 dark:text-gray-400">
 	<div
-		class="w-full flex flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-2 md:items-center md:justify-between"
+		class="w-full flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:space-x-2 lg:items-center lg:justify-start"
 	>
 		<img
 			src={profileImage}
@@ -15,15 +15,25 @@
 			class="w-full lg:w-1/4"
 		/>
 		<h2
-			class="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-700 dark:text-gray-200"
+			class="text-4xl sm:text-5xl lg:hidden lg:text-7xl font-bold text-gray-700 dark:text-gray-200"
 			transition:fade={{ duration: 1000, delay: 1000, easing: quintOut }}
 		>
-			Developer, Weeb, Gamer, <span class="text-primary"> and a lot more... </span>
+			Developer, <span class="text-primary"> Gamer</span>, Weeb...
+		</h2>
+		<h2
+			class="hidden text-4xl sm:text-5xl lg:block lg:text-7xl font-bold text-gray-700 dark:text-gray-200"
+			transition:fade={{ duration: 1000, delay: 1000, easing: quintOut }}
+		>
+			Developer
+			<br/>
+			<span class="text-primary"> Gamer</span>
+			<br/>
+			Weeb...
 		</h2>
 	</div>
 
 	<p
-		class="text-gray-600 dark:text-gray-300 mt-6 text-justify"
+		class="text-gray-600 dark:text-gray-300 mt-6 text-left lg:text-justify"
 		transition:fade={{ duration: 1000, delay: 1250, easing: quintOut }}
 	>
 		Hi there! I am a Full Stack Software Developer with a passion for MERN stack development. With 5
@@ -33,7 +43,7 @@
 	</p>
 
 	<p
-		class="text-gray-600 dark:text-gray-300 mt-2 text-justify"
+		class="text-gray-600 dark:text-gray-300 mt-2 text-left lg:text-justify"
 		transition:fade={{ duration: 1000, delay: 1500, easing: quintOut }}
 	>
 		In addition to my technical skills, I am also an anime, Genshin Impact, and Dota enthusiast. I
@@ -42,7 +52,7 @@
 		of work is crucial for maintaining a healthy work-life balance and staying motivated.
 	</p>
 	<p
-		class="text-gray-600 dark:text-gray-300 mt-2 text-justify"
+		class="text-gray-600 dark:text-gray-300 mt-2 text-left lg:text-justify"
 		transition:fade={{ duration: 1000, delay: 1750, easing: quintOut }}
 	>
 		As a developer, I am always seeking to learn and grow. I stay up-to-date with the latest
