@@ -1,5 +1,4 @@
 <script>
-	import axios from 'axios';
 	import { onMount } from 'svelte';
 	import { quintOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
@@ -18,63 +17,65 @@
 			: 'https://blog.yaepublishinghouse.online/rss.xml';
 
 	onMount(() => {
-		axios.get(rssURL).then((res) => {
-			const parser = new DOMParser();
-			const xml = parser.parseFromString(res.data, 'text/xml');
-			const items = xml.querySelectorAll('item');
+		fetch(rssURL)
+			.then((res) => res.text())
+			.then((data) => {
+				const parser = new DOMParser();
+				const xml = parser.parseFromString(data, 'text/xml');
+				const items = xml.querySelectorAll('item');
 
-			const maxArticles = 3;
-			/**
-			 * @type {{ title: string; link: string; pubDate: string; description: string; image: string; }[]}
-			 */
-			let temp = [];
-
-			items.forEach((item) => {
+				const maxArticles = 3;
 				/**
-				 * @typedef {Object} Article
-				 * @property {string} title - The article's title.
-				 * @property {string} link - The article's link.
-				 * @property {string} pubDate - The article's publication date.
-				 * @property {string} description - The article's description.
-				 * @property {string} image - The article's image.
-				 *
+				 * @type {{ title: string; link: string; pubDate: string; description: string; image: string; }[]}
 				 */
+				let temp = [];
 
-				const titleElement = item.querySelector('title');
-				const linkElement = item.querySelector('link');
-				const pubDateElement = item.querySelector('pubDate');
-				const descriptionElement = item.querySelector('description');
-				const imageElement = item.querySelector('cover_image');
+				items.forEach((item) => {
+					/**
+					 * @typedef {Object} Article
+					 * @property {string} title - The article's title.
+					 * @property {string} link - The article's link.
+					 * @property {string} pubDate - The article's publication date.
+					 * @property {string} description - The article's description.
+					 * @property {string} image - The article's image.
+					 *
+					 */
 
-				if (
-					titleElement &&
-					linkElement &&
-					pubDateElement &&
-					descriptionElement &&
-					imageElement &&
-					temp.length < maxArticles
-				) {
-					temp.push({
-						title: titleElement.innerHTML.replace('<![CDATA[', '').replace(']]>', ''),
-						link: linkElement.innerHTML,
-						pubDate: pubDateElement.innerHTML,
-						description: descriptionElement.innerHTML
-							.replace('<![CDATA[', '')
-							.replace(']]>', '')
-							// limit to 67 words
-							.split(' ')
-							.slice(0, 67)
-							.join(' ')
-							// append ellipsis
-							.concat('...'),
+					const titleElement = item.querySelector('title');
+					const linkElement = item.querySelector('link');
+					const pubDateElement = item.querySelector('pubDate');
+					const descriptionElement = item.querySelector('description');
+					const imageElement = item.querySelector('cover_image');
 
-						image: imageElement.innerHTML
-					});
-				}
+					if (
+						titleElement &&
+						linkElement &&
+						pubDateElement &&
+						descriptionElement &&
+						imageElement &&
+						temp.length < maxArticles
+					) {
+						temp.push({
+							title: titleElement.innerHTML.replace('<![CDATA[', '').replace(']]>', ''),
+							link: linkElement.innerHTML,
+							pubDate: pubDateElement.innerHTML,
+							description: descriptionElement.innerHTML
+								.replace('<![CDATA[', '')
+								.replace(']]>', '')
+								// limit to 67 words
+								.split(' ')
+								.slice(0, 67)
+								.join(' ')
+								// append ellipsis
+								.concat('...'),
+
+							image: imageElement.innerHTML
+						});
+					}
+				});
+
+				articles = temp;
 			});
-
-			articles = temp;
-		});
 	});
 </script>
 
