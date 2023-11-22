@@ -1,6 +1,8 @@
 <script>
 	import { quintOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
+
+	import profileImage from "$lib/images/profile1.png"
 </script>
 
 <section class="font-semibold text-gray-500 dark:text-gray-400">
@@ -8,7 +10,7 @@
 		class="w-full flex flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-2 md:items-center md:justify-between"
 	>
 		<img
-			src="https://pbs.twimg.com/profile_images/1680872507182661632/0-rWa-vC_200x200.jpg"
+			src={profileImage}
 			alt="profilepic"
 			class="w-full lg:w-1/4"
 		/>
